@@ -44,7 +44,7 @@ function get_source()
 	wget $hardware
 
 	# unpack
-	unzip "esp8266-1.6.5-1106-g8253b82.zip"
+	unzip -q "esp8266-1.6.5-1106-g8253b82.zip"
 	tar xzf "esptool-0.4.6-linux64.tar.gz"
 	tar xzf "mkspiffs-0.1.1-linux64.tar.gz"
 	tar xzf "linux64-xtensa-lx106-elf-gb404fb9.tar.gz"
