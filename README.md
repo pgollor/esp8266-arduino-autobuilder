@@ -1,10 +1,17 @@
 ## ESP8266 Arduino Autobuilder
 [![Linux build status](https://travis-ci.org/pgollor/esp8266-arduino-autobuilder.svg)](https://travis-ci.org/pgollor/esp8266-arduino-autobuilder)
 
-This repo contains some scripts which download the arduino-builder and some sources from Arduino ESP8266 to build a sketch without a GUI.
+This repo is a script collection which use the arduino-builder and some sources from Arduino ESP8266 to build a Arduino ESP8266 based sketch without a GUI.
 At this point the scripts are in pre aplha version.
 
 ## Usage
+### Download
+```
+git clone https://github.com/pgollor/esp8266-arduino-autobuilder.git
+cd esp8266-arduino-autobuilder
+```
+
+### Try the test
 ```
 source script.sh
 get_source
@@ -19,7 +26,9 @@ The compiled binary can be found in the `./build/` folder.
 
 ## License and Credits
 
-<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ESP8266 Arduino Autobuilder</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/pgollor/esp8266-arduino-autobuilder" property="cc:attributionName" rel="cc:attributionURL">Pascal Gollor</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> with the following exceptions:
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ESP8266 Arduino Autobuilder</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/pgollor/esp8266-arduino-autobuilder" property="cc:attributionName" rel="cc:attributionURL">Pascal Gollor</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+This repository does not contain the following code but some scripts donwload and use this programs:
 
  Source | License
 --------|--------
