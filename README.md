@@ -18,6 +18,9 @@ The compiled binary can be found in the `./build/` folder.
 - Finding a better solution for `boards.txt`: The arduino-builder can not chose the flash speed etc. from menu entries. So, at this point it is hard coded for one specific generic module.
 
 ## License and Credits
+
+<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">ESP8266 Arduino Autobuilder</span> by <a xmlns:cc="http://creativecommons.org/ns#" href="https://github.com/pgollor/esp8266-arduino-autobuilder" property="cc:attributionName" rel="cc:attributionURL">Pascal Gollor</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> with the following exceptions:
+
  Source | License
 --------|--------
 [Arduino builder](https://github.com/arduino/arduino-builder) | GPL
