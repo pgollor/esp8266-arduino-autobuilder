@@ -1,0 +1,14 @@
+sudo: false
+
+language: c
+
+os:
+  - linux
+
+#jdk:
+#  - oraclejdk8
+
+script:
+  - source script.sh
+  - get_source
+  - ./test/test.sh
