@@ -22,7 +22,6 @@ The compiled binary can be found in the `./build/` folder.
 
 ## TODO
 - Add a script which use the current board managers json file from ESP Arduino to get download links.
-- Finding a better solution for `boards.txt`: The arduino-builder can not chose the flash speed etc. from menu entries. So, at this point it is hard coded for one specific generic module.
 
 ## License and Credits
 
