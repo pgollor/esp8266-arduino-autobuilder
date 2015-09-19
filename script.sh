@@ -11,9 +11,7 @@ function arduino_build()
 	# add builder to path
 	PATH=$aBuilderPath:$PATH
 
-	echo $PATH
-
-	arduino-builder -verbose -build-path ./build/ -hardware ./hardware/ -hardware ./esp8266/hardware/ -tools ./tools/ -tools ./esp8266/tools/ -tools ./esp8266/hardware/esp8266/1.6.5-1106-g8253b82/tools/ -libraries ./esp8266/hardware/esp8266/1.6.5-1106-g8253b82/libraries/ -fqbn esp8266:1.6.5-1106-g8253b82:generic512 $sketch
+	arduino-builder -verbose -build-path ./build/ -hardware ./hardware/ -hardware ./esp8266/hardware/ -tools ./tools/ -tools ./esp8266/tools/ -tools ./esp8266/hardware/esp8266/1.6.5-1106-g8253b82/tools/ -libraries ./esp8266/hardware/esp8266/1.6.5-1106-g8253b82/libraries/ -fqbn esp8266:1.6.5-1106-g8253b82:generic -prefs=build.flash_ld=eagle.flash.512k.ld -prefs=build.flash_size=512K -prefs=build.flash_mode=dio -prefs=build.flash_freq=40 $sketch
 }
 
 function get_source()
@@ -63,7 +61,4 @@ function get_source()
 	mv "./src/xtensa-lx106-elf/" "./esp8266/tools/xtensa-lx106-elf-gcc/"$xtensaVersion
 
 	rm -R "./src/"
-
-	# exchange baords.txt
-	cp "boards.txt" "./esp8266/hardware/esp8266/"$espVersion"/boards.txt"
 }
