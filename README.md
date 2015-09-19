@@ -9,7 +9,7 @@ source script.sh
 get_source
 ./test/test.sh
 ```
-The compiled binary can be found in the `./build` folder.
+The compiled binary can be found in the `./build/` folder.
 
 
 ## TODO
