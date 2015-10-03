@@ -64,3 +64,14 @@ function get_source()
 
 	rm -R "./src/"
 }
+
+function del_source()
+{
+	# delete downloaded files
+	rm "./arduino-builder"
+	rm -R "./esp8266/"
+	rm -R "./hardware/"
+	rm -R "./tools/"
+	rm -R "./build/"
+}
+
