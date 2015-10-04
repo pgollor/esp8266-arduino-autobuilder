@@ -19,7 +19,7 @@ function arduino_build()
 function get_source()
 {
 	# download aduino builder first
-	wget -q -O - "http://downloads.arduino.cc/tools/arduino-builder-linux64-1.0.0-beta8.tar.bz2" | tar xjf -
+	wget -q -O - "http://downloads.arduino.cc/tools/arduino-builder-linux64-1.0.0-beta19.tar.bz2" | tar xjf -
 
 	# versions
 	local espVersion="1.6.5-1106-g8253b82"
