@@ -8,7 +8,7 @@
 #
 
 
-import sys, optparse, logging
+import sys, optparse, logging, os
 import json
 from urllib.request import urlopen
 from urllib.error import HTTPError
@@ -30,10 +30,10 @@ def parser():
 		help = "Json source url.",
 		default = None
 	)
-	group.add_option("-t", "--destination",
-		dest = "dest_dir",
+	group.add_option("-s", "--sourceDir",
+		dest = "src_dir",
 		action = "store",
-		help = "Destination directory. Defautl is ./src/",
+		help = "Source directory. Defautl is ./src/",
 		default = "./src/"
 	)
 	group.add_option("-a", "--architecture",
@@ -61,10 +61,67 @@ def parser():
 # end parser
 
 
+## @brief Print mkdir bash command
+# @param path Path to create
+def printMkdir(path):
+	out = "mkdir -p " + path + ";"
+	
+	logging.debug(out)
+	print(out)
+# end printMkdir
+
+
+## @brief Print wget bash command
+# @param url Downlaod url.
+# @param destPath Destination path
+def printWget(url, destPath):
+	out = "wget -O \"" + destPath + "\" \"" + url + "\";"
+	
+	logging.debug(out)	
+	print(out)
+# end printWget
+
+
+## @brief Print unpacking bash command.
+# @param destDir Destination directory.
+# @param fileName Archive file path.
+def printUnpack(fileName, destDir):
+	if (not destDir.endswith("/")):
+		destDir += "/"
+	# end if
+	
+	prefix = str();
+	suffix = ""
+	
+	if (fileName.endswith("tar.bz2")):
+		prefix = "tar xjf"
+		suffix = " -C " + destDir
+	elif (fileName.endswith("tar.gz")):
+		prefix = "tar xzf"
+		suffix = " -C " + destDir
+	elif (fileName.endswith("zip")):
+		prefix = "unzip -oqd " + destDir
+	# end if
+
+	out = prefix + " " + fileName + suffix + ";"
+
+	logging.debug(out)	
+	print(out)
+# end printUnpack
+
+
+def printMv(destDir, version):
+	out = "mv \"" + destDir + "/$(ls " + destDir + "/ | tr -d \'[[\\\\n]]')\" \"" + destDir + "/" + version + "\";"
+	logging.debug(out)
+	print(out)
+# end printMv
+
+
 ## @brief Get tool url.
 # @param toolList Tool dict.
+# @param destDir Destination directory.
 # @param arch Architecture.
-def toolUrl(tool, arch):
+def toolUrl(tool, srcDir, arch, rootDir):
 	systems = tool['systems']
 	
 	for system in systems:
@@ -73,7 +130,15 @@ def toolUrl(tool, arch):
 		# end if
 		
 		#return {'url': system['url'], 'fileName': system['archiveFileName']}
+		fileName = system['archiveFileName']
+		version = tool['version']
+		destDir = rootDir + "tools/" + tool['name']
 		
+		# print create directory command
+		printMkdir(destDir)		
+		printWget(system['url'], srcDir + fileName)
+		printUnpack(srcDir + fileName, destDir)
+		printMv(destDir, version)
 	# end for
 	
 # end downloadTool
@@ -81,10 +146,10 @@ def toolUrl(tool, arch):
 
 ## @brief Handle json content.
 # @param url Json URL.
-# @param destDir Destination directory.
+# @param srcDir Source temporary directory.
 # @param arch Architecture.
 # @return True or False.
-def handleJson(url, destDir, arch):
+def handleJson(url, srcDir, arch):
 	try:
 		res = urlopen(url)
 	except HTTPError as e:
@@ -94,9 +159,11 @@ def handleJson(url, destDir, arch):
 	# end try
 	
 	# check destination directory
-	if (not destDir.endswith("/")):
-		destDir += "/";
+	#srcDir = srcDir.replace("./", "")
+	if (not srcDir.endswith("/")):
+		srcDir += "/";
 	# end if
+	#srcDir = os.environ['PWD'] + "/" + srcDir
 	
 	# read data from url
 	info = res.info()
@@ -120,9 +187,22 @@ def handleJson(url, destDir, arch):
 	url = platforms['url']
 	deps = platforms['toolsDependencies']
 	fileName = platforms['archiveFileName']
+	version = platforms['version']
+	name = platforms['name']
+	rootDir = "./" + name + "/"
+	#destDir = rootDir + "hardware/" + name + "/" + version
+	destDir = rootDir + "hardware/" + name
 	
 	#urlretrieve(url, destDir + fileName)
+	logging.info("Platform: %s with version %s", name, version)
 	
+	# print bash commands
+	printMkdir(destDir)
+	printWget(url, srcDir + fileName)
+	printUnpack(srcDir + fileName, destDir)
+	printMv(destDir, version)
+	
+	#return True
 	
 	# get tools which platform depends on
 	toolList = list()
@@ -140,7 +220,7 @@ def handleJson(url, destDir, arch):
 		
 		logging.info("Tool: %s with version %s", name, tool['version'])
 		
-		toolUrl(tool, arch)
+		toolUrl(tool, srcDir, arch, rootDir)
 	# end for
 
 	return True
@@ -172,7 +252,7 @@ def main():
 	# end if
 	
 	# handle sata
-	if (not handleJson(options.source_url, options.dest_dir, options.arch)):
+	if (not handleJson(options.source_url, options.src_dir, options.arch)):
 		return 1
 	# end if
 	
