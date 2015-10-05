@@ -193,7 +193,13 @@ def handleJson(url, srcDir, arch):
 	#destDir = rootDir + "hardware/" + name + "/" + version
 	destDir = rootDir + "hardware/" + name
 	
-	#urlretrieve(url, destDir + fileName)
+	
+	# print set env variable
+	out = "export ESP_VERSION=\"" + version + "\";";
+	print(out)
+	logging.debug(out)
+	
+	# logging info
 	logging.info("Platform: %s with version %s", name, version)
 	
 	# print bash commands

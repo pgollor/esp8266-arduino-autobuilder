@@ -11,9 +11,12 @@ function arduino_build()
 	# add builder to path
 	PATH=$aBuilderPath:$PATH
 
-	echo -e "\n arduino-builder -verbose -build-path ./build/ -hardware ./hardware/ -hardware ./esp8266/hardware/ -tools ./tools/ -tools ./esp8266/tools/ -tools ./esp8266/hardware/esp8266/1.6.5-1106-g8253b82/tools/ -libraries ./esp8266/hardware/esp8266/1.6.5-1106-g8253b82/libraries/ -fqbn esp8266:1.6.5-1106-g8253b82:generic -prefs=build.flash_ld=eagle.flash.512k.ld -prefs=build.flash_size=512K -prefs=build.flash_mode=dio -prefs=build.flash_freq=40 $sketch \n"
+	cmd="arduino-builder -verbose -build-path ./build/ -hardware ./hardware/ -hardware ./esp8266/hardware/ -tools ./tools/ -tools ./esp8266/tools/ -tools ./esp8266/hardware/esp8266/$ESP_VERSION/tools/ -libraries ./esp8266/hardware/esp8266/$ESP_VERSION/libraries/ -fqbn esp8266:$ESP_VERSION:generic -prefs=build.flash_ld=eagle.flash.512k.ld -prefs=build.flash_size=512K -prefs=build.flash_mode=dio -prefs=build.flash_freq=40 $sketch"
 
-	arduino-builder -verbose -build-path ./build/ -hardware ./hardware/ -hardware ./esp8266/hardware/ -tools ./tools/ -tools ./esp8266/tools/ -tools ./esp8266/hardware/esp8266/1.6.5-1106-g8253b82/tools/ -libraries ./esp8266/hardware/esp8266/1.6.5-1106-g8253b82/libraries/ -fqbn esp8266:1.6.5-1106-g8253b82:generic -prefs=build.flash_ld=eagle.flash.512k.ld -prefs=build.flash_size=512K -prefs=build.flash_mode=dio -prefs=build.flash_freq=40 $sketch
+	echo -e "\n$cmd\n"
+
+	# execute command
+	eval $cmd
 }
 
 function get_source()
@@ -36,7 +39,7 @@ function get_source()
 	do
 		cmd="$(echo -e "${i}" | tr -d '[[\n]]')"
 
-		#echo $cmd
+		# execute command
 		eval $cmd
 	
 		if [ $? -ne 0 ];
