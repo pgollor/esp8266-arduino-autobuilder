@@ -1,6 +1,8 @@
 sudo: false
 
-language: c
+language: python
+python:
+  - "3.4"
 
 os:
   - linux
