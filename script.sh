@@ -27,7 +27,7 @@ function get_source()
 	mkdir "./src/"
 
 	# get source links and filenames
-	cmd="python3 ./get_source.py -d -u http://arduino.esp8266.com/staging/package_esp8266com_index.json"
+	cmd="./get_source.py -d -u http://arduino.esp8266.com/staging/package_esp8266com_index.json"
 
 	# execute command
 	res=`$cmd`
