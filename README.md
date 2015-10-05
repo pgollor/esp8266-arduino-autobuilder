@@ -21,7 +21,9 @@ The compiled binary can be found in the `./build/` folder.
 
 
 ## TODO
-- Add a script which use the current board managers json file from ESP Arduino to get download links.
+- [x] Add a script which use the current board managers json file from ESP Arduino to get download links.
+- [ ] add jason link list for older releases
+- [ ] check why build with arduino-builder-1.0.0-beta13 or newer fails
 
 ## License and Credits
 
