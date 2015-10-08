@@ -1,6 +1,5 @@
 ## ESP8266 Arduino Autobuilder
 [![Linux build status](https://travis-ci.org/pgollor/esp8266-arduino-autobuilder.svg)](https://travis-ci.org/pgollor/esp8266-arduino-autobuilder)
-[![Build Status](https://jenkins.gollordasilva.de/job/esp8266-arduino-autobuilder/badge/icon)](https://jenkins.gollordasilva.de/job/esp8266-arduino-autobuilder/)
 
 This repo is a script collection which use the arduino-builder and some sources from Arduino ESP8266 to build a Arduino ESP8266 based sketch without a GUI.
 At this point the scripts are in pre aplha version.
