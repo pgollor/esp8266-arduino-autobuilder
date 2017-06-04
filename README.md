@@ -1,3 +1,6 @@
+# deprecated
+
+
 ## ESP8266 Arduino Autobuilder
 [![Linux build status](https://travis-ci.org/pgollor/esp8266-arduino-autobuilder.svg)](https://travis-ci.org/pgollor/esp8266-arduino-autobuilder)
 
